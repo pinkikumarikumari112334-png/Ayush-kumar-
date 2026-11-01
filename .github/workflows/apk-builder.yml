@@ -2,7 +2,11 @@ name: APB Android APK Builder
 
 
 
+
+
+
 on:
+
 
   workflow_dispatch:
   
@@ -64,13 +68,19 @@ on:
         
 
 
+
+
 permissions:
+
 
   contents: read
   
 
 
+
+
 env:
+
 
   APB_JOB_ID: ${{ inputs.job_id }}
   
@@ -78,7 +88,10 @@ env:
   
 
 
+
+
 jobs:
+
 
   build:
   
@@ -96,14 +109,16 @@ jobs:
         
         with:
         
-          app-id: ${{ secrets.GITHUB_APP_ID }}
+          app-id: ${{ secrets.APB_GITHUB_APP_ID }}
           
-          private-key: ${{ secrets.GITHUB_APP_PRIVATE_KEY }}
+          private-key: ${{ secrets.APB_GITHUB_APP_PRIVATE_KEY }}
           
           owner: ${{ inputs.repo_owner }}
           
           repositories: ${{ inputs.repo_name }}
           
+
+
 
 
       - name: Check out the requested source repository
@@ -124,13 +139,15 @@ jobs:
           
 
 
+
+
       - name: Validate the ElevenLabs voice
       
         working-directory: source
         
         env:
         
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.APB_ELEVENLABS_API_KEY }}
           
         run: |
         
@@ -144,6 +161,8 @@ jobs:
           
           rm -f /tmp/apb-voice.json
           
+
+
 
 
       - name: Inspect supported Android project
@@ -174,27 +193,11 @@ jobs:
           
 
 
+
+
       - name: Build the Android APK
       
         working-direc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
